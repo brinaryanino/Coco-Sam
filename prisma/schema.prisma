@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Customer {
+  id             String    @id @default(uuid())
+  name           String    // e.g. "Lombok Spa Center"
+  type           String    // e.g. "SPA", "HOTEL", "RESTO", "VILLA"
+  picName        String    // Person In Charge
+  whatsappNumber String
+  email          String?
+  address        String
+  status         String    // e.g. "LEAD" (unconverted/sample stage), "ACTIVE", "INACTIVE"
+  orders         Order[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String      // e.g. "Virgin Coconut Oil (VCO)"
+  sku         String      @unique
+  size        String      // e.g. "100ml", "1L", "5L", "20L", "Custom"
+  basePrice   Float
+  stock       Int         @default(0)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id             String      @id @default(uuid())
+  invoiceNumber  String      @unique // e.g. "INV-20260708-001"
+  customerId     String
+  customer       Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  orderDate      DateTime    @default(now())
+  status         String      // e.g. "PENDING", "CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"
+  totalAmount    Float
+  paymentStatus  String      // e.g. "UNPAID", "PARTIAL", "PAID"
+  notes          String?     // Custom labeling requests, delivery specific instructions
+  orderItems     OrderItem[]
+  payments       Payment[]
+  shipments      Shipment[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+  unitPrice Float    // B2B specific price
+  subtotal  Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  paymentDate   DateTime @default(now())
+  amount        Float
+  paymentMethod String   // e.g. "BANK_TRANSFER", "CASH", "COD"
+  proofPath     String?  // upload receipt image/pdf path
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Shipment {
+  id             String    @id @default(uuid())
+  orderId        String
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  shipmentDate   DateTime  @default(now())
+  deliveryStatus String    // e.g. "PENDING", "IN_TRANSIT", "DELIVERED"
+  courierName    String?   // Local driver name or logistics company
+  trackingNumber String?   // Waybill / receipt number
+  receivedBy     String?   // Receiver's name at the hotel/villa
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
