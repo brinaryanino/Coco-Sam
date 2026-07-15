@@ -119,12 +119,43 @@ export async function createCustomer(data: {
     return { success: false, error: error.message };
   }
 }
-
 export async function updateCustomerStatus(id: string, status: string) {
   try {
     const customer = await prisma.customer.update({
       where: { id },
       data: { status: status.toUpperCase() },
+    });
+    revalidatePath("/admin/customers");
+    return { success: true, customer };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateCustomer(
+  id: string,
+  data: {
+    name: string;
+    type: string;
+    picName: string;
+    whatsappNumber: string;
+    email?: string;
+    address: string;
+    status: string;
+  }
+) {
+  try {
+    const customer = await prisma.customer.update({
+      where: { id },
+      data: {
+        name: data.name,
+        type: data.type.toUpperCase(),
+        picName: data.picName,
+        whatsappNumber: data.whatsappNumber.replace(/[^0-9]/g, ""),
+        email: data.email || null,
+        address: data.address,
+        status: data.status.toUpperCase(),
+      },
     });
     revalidatePath("/admin/customers");
     return { success: true, customer };
@@ -259,6 +290,17 @@ export async function createOrder(data: {
           },
         },
       });
+
+      // Auto-upgrade customer status if it is currently "LEAD"
+      const customer = await tx.customer.findUnique({
+        where: { id: data.customerId },
+      });
+      if (customer && customer.status === "LEAD") {
+        await tx.customer.update({
+          where: { id: data.customerId },
+          data: { status: "ACTIVE" },
+        });
+      }
 
       // 2. Decrement stocks
       for (const item of data.items) {

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { createCustomer, updateCustomerStatus } from "@/app/actions/sales";
-import { Plus, X, Phone, Mail, MapPin, UserPlus, CheckCircle, HelpCircle } from "lucide-react";
+import { createCustomer, updateCustomerStatus, updateCustomer } from "@/app/actions/sales";
+import { Plus, X, Phone, Mail, MapPin, UserPlus, CheckCircle, HelpCircle, Edit } from "lucide-react";
 
 interface CustomersPageClientProps {
   initialCustomers: any[];
@@ -13,6 +13,8 @@ export default function CustomersPageClient({
 }: CustomersPageClientProps) {
   const [customers, setCustomers] = useState(initialCustomers);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Form states
@@ -66,6 +68,33 @@ export default function CustomersPageClient({
     const res = await updateCustomerStatus(id, "ACTIVE");
     if (res.success) {
       window.location.reload();
+    }
+  };
+
+  // Submit handler: Edit Customer
+  const handleEditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    if (!editingCustomerId || !name || !picName || !whatsappNumber || !address) {
+      setErrorMsg("Nama Mitra, Nama PIC, No WhatsApp, dan Alamat wajib diisi.");
+      return;
+    }
+
+    const res = await updateCustomer(editingCustomerId, {
+      name,
+      type,
+      picName,
+      whatsappNumber,
+      email: email || undefined,
+      address,
+      status,
+    });
+
+    if (res.success) {
+      window.location.reload();
+    } else {
+      setErrorMsg(res.error || "Gagal memperbarui data mitra.");
     }
   };
 
@@ -168,7 +197,6 @@ export default function CustomersPageClient({
                       </span>
                     </td>
                     
-                    {/* Actions */}
                     <td className="py-4 px-4 text-center">
                       <div className="flex justify-center gap-2">
                         {c.status === "LEAD" && (
@@ -192,6 +220,25 @@ export default function CustomersPageClient({
                             {c.status === "ACTIVE" ? "Nonaktifkan" : "Aktifkan"}
                           </button>
                         )}
+                        <button
+                          onClick={() => {
+                            setEditingCustomerId(c.id);
+                            setName(c.name);
+                            setType(c.type);
+                            setPicName(c.picName);
+                            setWhatsappNumber(c.whatsappNumber);
+                            setEmail(c.email || "");
+                            setAddress(c.address);
+                            setStatus(c.status);
+                            setErrorMsg(null);
+                            setIsEditModalOpen(true);
+                          }}
+                          className="border border-gray-200 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1"
+                          title="Edit Profil Mitra"
+                        >
+                          <Edit className="w-3.5 h-3.5" />
+                          <span>Edit</span>
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -327,6 +374,138 @@ export default function CustomersPageClient({
                   className="px-5 py-2.5 rounded-xl bg-brand-green-500 hover:bg-brand-green-600 text-white font-bold text-sm"
                 >
                   Daftarkan Mitra
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* ====================================================== */}
+      {/* MODAL: EDIT CUSTOMER */}
+      {/* ====================================================== */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button
+              onClick={() => setIsEditModalOpen(false)}
+              className="absolute top-6 right-6 text-gray-400 hover:bg-gray-50 p-2 rounded-xl"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Edit className="w-6 h-6 text-brand-green-500" />
+              <span>Edit Profil Mitra B2B</span>
+            </h3>
+
+            {errorMsg && (
+              <div className="p-4 mb-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl">
+                {errorMsg}
+              </div>
+            )}
+
+            <form onSubmit={handleEditSubmit} className="space-y-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase">Nama Instansi / Mitra</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Contoh: Sheraton Senggigi Resort"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase">Tipe Instansi</label>
+                  <select
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 bg-white text-sm"
+                  >
+                    <option value="SPA">SPA</option>
+                    <option value="HOTEL">HOTEL</option>
+                    <option value="VILLA">VILLA</option>
+                    <option value="RESTO">RESTO</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase">Status Mitra</label>
+                  <select
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 bg-white text-sm"
+                  >
+                    <option value="ACTIVE">ACTIVE (Mitra Aktif)</option>
+                    <option value="LEAD">LEAD (Prospek Sample)</option>
+                    <option value="INACTIVE">INACTIVE (Nonaktif)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase">Nama PIC Penanggung Jawab</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Contoh: Ni Wayan Suasti (Spa Mgr)"
+                  value={picName}
+                  onChange={(e) => setPicName(e.target.value)}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase">WhatsApp PIC (Format: 62...)</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Contoh: 6285337280512"
+                    value={whatsappNumber}
+                    onChange={(e) => setWhatsappNumber(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase">Email Mitra (Opsional)</label>
+                  <input
+                    type="email"
+                    placeholder="Contoh: pic@hotel.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase">Alamat Pengiriman Lengkap</label>
+                <textarea
+                  required
+                  placeholder="Nama jalan, nomor, kecamatan, kabupaten, area Lombok..."
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm h-16"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsEditModalOpen(false)}
+                  className="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-500 font-bold text-sm hover:bg-gray-50"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-brand-green-500 hover:bg-brand-green-600 text-white font-bold text-sm"
+                >
+                  Simpan Perubahan
                 </button>
               </div>
             </form>
