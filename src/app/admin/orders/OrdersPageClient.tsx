@@ -22,8 +22,12 @@ export default function OrdersPageClient({
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isShipmentModalOpen, setIsShipmentModalOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+  const [isWAModalOpen, setIsWAModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   
   const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [selectedOrderForWA, setSelectedOrderForWA] = useState<any>(null);
+  const [newCreatedOrder, setNewCreatedOrder] = useState<any>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // New Order Form state
@@ -51,6 +55,42 @@ export default function OrdersPageClient({
       currency: "IDR",
       maximumFractionDigits: 0,
     }).format(num);
+  };
+
+  // Helper: Send B2B WhatsApp Penagihan & Notif
+  const sendWhatsAppMessage = (order: any, type: "INVOICE" | "PAYMENT" | "SHIPMENT") => {
+    if (!order || !order.customer) return;
+    
+    const waNumber = order.customer.whatsappNumber.replace(/[^0-9]/g, "");
+    const pic = order.customer.picName;
+    const customerName = order.customer.name;
+    const invoiceNum = order.invoiceNumber;
+    const totalAmount = formatRp(order.totalAmount);
+
+    let text = "";
+
+    if (type === "INVOICE") {
+      const itemsList = order.orderItems
+        .map((item: any) => `- ${item.product.name} (${item.product.size}) x ${item.quantity} @${formatRp(item.unitPrice)}`)
+        .join("\n");
+
+      text = `Halo ${pic},\n\nBerikut rincian tagihan pesanan VCO CocoSam Anda untuk *${customerName}*:\n\n*Nomor Invoice:* ${invoiceNum}\n*Detail Pesanan:*\n${itemsList}\n\n*Total Tagihan:* *${totalAmount}*\n*Status Pembayaran:* ${order.paymentStatus}\n\nPembayaran dapat dilakukan melalui transfer bank ke:\n🏦 *Bank BCA*\n*No. Rekening:* 123456789\n*Atas Nama:* IKM Al-Amin\n\nJika sudah melakukan pembayaran, mohon kirimkan bukti transfer di chat ini. Terima kasih! 🙏🥥`;
+    } else if (type === "PAYMENT") {
+      const totalPaid = order.payments.reduce((sum: number, p: any) => sum + p.amount, 0);
+      const remaining = Math.max(0, order.totalAmount - totalPaid);
+      
+      text = `Halo ${pic},\n\nTerima kasih, pembayaran Anda untuk Invoice *${invoiceNum}* (*${customerName}*) telah kami terima.\n\n*Total Tagihan:* ${totalAmount}\n*Total Terbayar:* *${formatRp(totalPaid)}*\n*Sisa Tagihan:* *${formatRp(remaining)}*\n*Status Pembayaran:* ${order.paymentStatus === "PAID" ? "✅ Lunas" : "⏳ Sebagian/DP/Termin"}\n\nTerima kasih atas kerja samanya! 🙏🥥`;
+    } else if (type === "SHIPMENT") {
+      const shipment = order.shipments?.[order.shipments.length - 1];
+      const courier = shipment?.courierName || "Supir Internal";
+      const resi = shipment?.trackingNumber ? `Resi: ${shipment.trackingNumber}` : "";
+
+      text = `Halo ${pic},\n\nKabar baik! Pesanan VCO CocoSam Anda untuk *${customerName}* dengan Invoice *${invoiceNum}* telah dikirim.\n\n*Kurir/Supir:* ${courier}\n${resi}\n\nStatus pesanan Anda saat ini adalah *${order.status}* (Dalam Pengiriman/Selesai). Mohon infokan jika barang sudah sampai dengan aman. Terima kasih! 🚚🥥`;
+    }
+
+    const encodedText = encodeURIComponent(text);
+    const waUrl = `https://wa.me/${waNumber}?text=${encodedText}`;
+    window.open(waUrl, "_blank");
   };
 
   // Handler: Select product in order form
@@ -112,8 +152,9 @@ export default function OrdersPageClient({
     });
 
     if (res.success && res.order) {
-      // Reload page to get fresh data
-      window.location.reload();
+      setNewCreatedOrder(res.order);
+      setIsOrderModalOpen(false);
+      setIsSuccessModalOpen(true);
     } else {
       setErrorMsg(res.error || "Gagal membuat pesanan.");
     }
@@ -324,6 +365,18 @@ export default function OrdersPageClient({
                           title="Ubah Status Order"
                         >
                           <RefreshCw className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedOrderForWA(order);
+                            setIsWAModalOpen(true);
+                          }}
+                          className="p-2 hover:bg-green-50 text-green-600 rounded-lg transition-colors"
+                          title="Kirim Notifikasi WhatsApp"
+                        >
+                          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.488 2.01 14.041.986 11.45.986c-5.441 0-9.87 4.372-9.873 9.8.002 1.944.512 3.842 1.48 5.51L2.08 21.908l5.77-1.48c1.642.894 3.011 1.226 4.797 1.226zM17.476 14.4c-.3-.15-1.77-.874-2.043-.974-.275-.098-.475-.149-.673.15-.198.299-.768.974-.941 1.173-.173.199-.347.225-.647.075-.3-.15-1.272-.47-2.423-1.493-.896-.8-1.5-1.787-1.677-2.088-.175-.3-.02-.463.13-.612.133-.135.3-.347.45-.522.15-.175.2-.299.3-.499.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.491-.51-.673-.51-.173-.009-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.77-.724 2.017-1.424.248-.699.248-1.3.173-1.424-.076-.124-.272-.198-.57-.349z"/>
+                          </svg>
                         </button>
                       </div>
                     </td>
@@ -630,6 +683,156 @@ export default function OrdersPageClient({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ====================================================== */}
+      {/* MODAL: WHATSAPP OPTIONS */}
+      {/* ====================================================== */}
+      {isWAModalOpen && selectedOrderForWA && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button
+              onClick={() => setIsWAModalOpen(false)}
+              className="absolute top-6 right-6 text-gray-400 hover:bg-gray-50 p-2 rounded-xl"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <svg className="w-6 h-6 text-green-600 fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.488 2.01 14.041.986 11.45.986c-5.441 0-9.87 4.372-9.873 9.8.002 1.944.512 3.842 1.48 5.51L2.08 21.908l5.77-1.48c1.642.894 3.011 1.226 4.797 1.226zM17.476 14.4c-.3-.15-1.77-.874-2.043-.974-.275-.098-.475-.149-.673.15-.198.299-.768.974-.941 1.173-.173.199-.347.225-.647.075-.3-.15-1.272-.47-2.423-1.493-.896-.8-1.5-1.787-1.677-2.088-.175-.3-.02-.463.13-.612.133-.135.3-.347.45-.522.15-.175.2-.299.3-.499.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.491-.51-.673-.51-.173-.009-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.77-.724 2.017-1.424.248-.699.248-1.3.173-1.424-.076-.124-.272-.198-.57-.349z"/>
+              </svg>
+              <span>Kirim Notifikasi WhatsApp</span>
+            </h3>
+            <p className="text-sm text-gray-500 mb-6">
+              Pilih tipe pesan otomatis untuk dikirim ke WhatsApp PIC <strong>{selectedOrderForWA.customer.picName}</strong> ({selectedOrderForWA.customer.name}).
+            </p>
+
+            <div className="space-y-4">
+              {/* Option 1: Billing */}
+              <button
+                onClick={() => {
+                  sendWhatsAppMessage(selectedOrderForWA, "INVOICE");
+                  setIsWAModalOpen(false);
+                  window.location.reload();
+                }}
+                className="w-full flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-green-500 hover:bg-green-50/20 text-left transition-all group"
+              >
+                <div className="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
+                  <ShoppingCart className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-gray-900 text-sm group-hover:text-green-700 transition-colors">1. Tagihan Belanja B2B (Invoice)</h4>
+                  <p className="text-xs text-gray-500 mt-1">Mengirimkan rincian pembelian VCO, total harga kesepakatan, dan nomor rekening BCA penagihan.</p>
+                </div>
+              </button>
+
+              {/* Option 2: Payment Receipt */}
+              <button
+                onClick={() => {
+                  sendWhatsAppMessage(selectedOrderForWA, "PAYMENT");
+                  setIsWAModalOpen(false);
+                  window.location.reload();
+                }}
+                disabled={selectedOrderForWA.payments.length === 0}
+                className="w-full flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-green-500 hover:bg-green-50/20 text-left transition-all group disabled:opacity-40 disabled:hover:border-gray-100 disabled:hover:bg-transparent"
+              >
+                <div className="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
+                  <Landmark className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-gray-900 text-sm group-hover:text-green-700 transition-colors">2. Konfirmasi Tanda Terima (Receipt)</h4>
+                  <p className="text-xs text-gray-500 mt-1">Mengonfirmasi nominal pembayaran DP/pelunasan yang masuk beserta sisa tagihan.</p>
+                </div>
+              </button>
+
+              {/* Option 3: Shipping */}
+              <button
+                onClick={() => {
+                  sendWhatsAppMessage(selectedOrderForWA, "SHIPMENT");
+                  setIsWAModalOpen(false);
+                  window.location.reload();
+                }}
+                disabled={selectedOrderForWA.shipments.length === 0}
+                className="w-full flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-green-500 hover:bg-green-50/20 text-left transition-all group disabled:opacity-40 disabled:hover:border-gray-100 disabled:hover:bg-transparent"
+              >
+                <div className="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
+                  <Truck className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-gray-900 text-sm group-hover:text-green-700 transition-colors">3. Status Pengiriman Logistik</h4>
+                  <p className="text-xs text-gray-500 mt-1">Mengabarkan barang telah dibawa kurir/supir internal, lengkap dengan nomor resi kargo.</p>
+                </div>
+              </button>
+            </div>
+
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setIsWAModalOpen(false)}
+                className="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-500 font-bold text-sm hover:bg-gray-50"
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ====================================================== */}
+      {/* MODAL: ORDER SUCCESS WITH IMMEDIATE WA */}
+      {/* ====================================================== */}
+      {isSuccessModalOpen && newCreatedOrder && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl text-center space-y-6 relative border border-green-100">
+            <div className="w-16 h-16 rounded-full bg-green-50 text-green-600 flex items-center justify-center mx-auto shadow-inner border border-green-100">
+              <ShoppingCart className="w-8 h-8" />
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold text-gray-900">Invoice Berhasil Dibuat!</h3>
+              <p className="text-sm text-gray-500">
+                Pesanan dengan nomor invoice <strong className="text-brand-green-700">{newCreatedOrder.invoiceNumber}</strong> telah berhasil dicatat di database.
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 text-left text-xs space-y-1.5">
+              <div className="flex justify-between">
+                <span className="text-gray-400 font-medium">Pelanggan:</span>
+                <span className="font-bold text-gray-800">{newCreatedOrder.customer.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400 font-medium">Total Tagihan:</span>
+                <span className="font-bold text-gray-900">{formatRp(newCreatedOrder.totalAmount)}</span>
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              <button
+                onClick={() => {
+                  sendWhatsAppMessage(newCreatedOrder, "INVOICE");
+                  setIsSuccessModalOpen(false);
+                  window.location.reload();
+                }}
+                className="w-full flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors"
+              >
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.453L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.488 2.01 14.041.986 11.45.986c-5.441 0-9.87 4.372-9.873 9.8.002 1.944.512 3.842 1.48 5.51L2.08 21.908l5.77-1.48c1.642.894 3.011 1.226 4.797 1.226zM17.476 14.4c-.3-.15-1.77-.874-2.043-.974-.275-.098-.475-.149-.673.15-.198.299-.768.974-.941 1.173-.173.199-.347.225-.647.075-.3-.15-1.272-.47-2.423-1.493-.896-.8-1.5-1.787-1.677-2.088-.175-.3-.02-.463.13-.612.133-.135.3-.347.45-.522.15-.175.2-.299.3-.499.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.491-.51-.673-.51-.173-.009-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.77-.724 2.017-1.424.248-.699.248-1.3.173-1.424-.076-.124-.272-.198-.57-.349z"/>
+                </svg>
+                <span>Kirim Tagihan via WhatsApp</span>
+              </button>
+              
+              <button
+                onClick={() => {
+                  setIsSuccessModalOpen(false);
+                  window.location.reload();
+                }}
+                className="w-full border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-3.5 rounded-xl text-sm transition-colors"
+              >
+                Selesai & Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}

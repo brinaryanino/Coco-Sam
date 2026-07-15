@@ -272,7 +272,20 @@ export async function createOrder(data: {
         });
       }
 
-      return newOrder;
+      // Fetch full order with relations to return
+      const fullOrder = await tx.order.findUnique({
+        where: { id: newOrder.id },
+        include: {
+          customer: true,
+          orderItems: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      });
+
+      return fullOrder;
     });
 
     revalidatePath("/admin/orders");
