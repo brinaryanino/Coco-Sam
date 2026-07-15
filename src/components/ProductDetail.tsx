@@ -1,22 +1,27 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { ListChecks } from "lucide-react";
 
 export default function ProductDetail() {
+  const images = ["/image2.jpg", "/image3.jpg", "/image4.jpg", "/image5.jpg"];
+  const [activeImage, setActiveImage] = useState("/image2.jpg");
 
   return (
     <section id="produk" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Product Image */}
-          <div className="lg:col-span-6 relative flex justify-center">
+          {/* Left Column: Product Image & Gallery */}
+          <div className="lg:col-span-6 flex flex-col items-center relative">
             <div className="relative w-[320px] h-[440px] sm:w-[420px] sm:h-[560px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-300">
               <Image
-                src="/image2.jpg"
-                alt="CocoSam Virgin Coconut Oil Kitchen Bottle Shot"
+                src={activeImage}
+                alt="CocoSam Virgin Coconut Oil Product Detail Shot"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white text-left">
@@ -28,7 +33,31 @@ export default function ProductDetail() {
               </div>
             </div>
             {/* Background absolute frame */}
-            <div className="absolute -z-10 -left-4 -top-4 w-full h-full border-2 border-dashed border-brand-brown-200 rounded-3xl pointer-events-none" />
+            <div className="absolute -z-10 -left-4 -top-4 w-[320px] h-[440px] sm:w-[420px] sm:h-[560px] border-2 border-dashed border-brand-brown-200 rounded-3xl pointer-events-none" />
+
+            {/* Thumbnails Gallery */}
+            <div className="flex space-x-3 mt-8">
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImage(img)}
+                  className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                    activeImage === img
+                      ? "border-brand-green-500 scale-105 ring-2 ring-brand-green-200"
+                      : "border-gray-200 opacity-60 hover:opacity-100 hover:scale-105"
+                  }`}
+                  aria-label={`Show product image ${i + 1}`}
+                >
+                  <Image
+                    src={img}
+                    alt={`Product thumbnail ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="64px"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Right Column: Product Info */}
@@ -64,7 +93,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Usage Directions Card */}
-            <div className="bg-brand-cream-50/60 rounded-2xl p-6 border border-brand-green-100/50 mb-8">
+            <div className="bg-brand-cream-50/60 rounded-2xl p-6 border border-brand-green-100/50">
               <h3 className="font-bold text-brand-green-800 flex items-center space-x-2 mb-3">
                 <ListChecks className="w-5 h-5" />
                 <span>Petunjuk Penggunaan</span>

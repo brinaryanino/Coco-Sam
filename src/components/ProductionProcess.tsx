@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
 export default function ProductionProcess() {
@@ -7,16 +8,19 @@ export default function ProductionProcess() {
       step: "01",
       title: "Kelapa Pilihan Lombok",
       desc: "Dipanen langsung oleh petani lokal di Lombok. Kami hanya memilih kelapa matang segar berkualitas terbaik untuk menjamin rasa dan aroma premium.",
+      image: "/image3.jpg",
     },
     {
       step: "02",
       title: "Cold-Press (Tanpa Panas)",
       desc: "Diekstrak dengan metode cold-press mekanis tanpa pemanasan sedikit pun. Suhu dingin konstan menjaga nutrisi, enzim, dan asam laurat tetap utuh.",
+      image: "/image4.jpg",
     },
     {
       step: "03",
       title: "Penyaringan Higienis",
       desc: "Melalui proses filtrasi ganda dalam lingkungan produksi higienis IKM Al-Amin. Menghasilkan minyak kelapa murni yang bening kristal bebas ampas.",
+      image: "/image5.jpg",
     },
   ];
 
@@ -40,18 +44,31 @@ export default function ProductionProcess() {
         </div>
 
         {/* Steps Timeline Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative">
-          {/* Decorative connector line on desktop */}
-          <div className="hidden lg:block absolute top-16 left-1/6 right-1/6 h-[2px] bg-brand-green-100 z-0" />
-
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {steps.map((item, index) => (
-            <div key={index} className="relative z-10 flex flex-col items-center text-center px-4">
-              {/* Number Badge */}
-              <div className="w-16 h-16 rounded-full bg-brand-green-500 text-white font-extrabold text-xl flex items-center justify-center shadow-lg border-4 border-white mb-6 group-hover:scale-105 transition-transform">
-                {item.step}
+            <div key={index} className="relative z-10 flex flex-col items-center text-center group">
+              {/* Step Image Card */}
+              <div className="relative w-full h-56 sm:h-64 rounded-3xl overflow-hidden shadow-md border-4 border-white mb-6 transform group-hover:scale-[1.02] transition-transform duration-300">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                {/* Number Badge Overlay */}
+                <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-brand-green-500 text-white font-bold flex items-center justify-center shadow-md border-2 border-white text-sm">
+                  {item.step}
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed max-w-sm">{item.desc}</p>
+              
+              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-green-700 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
