@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingCart, Users, ArrowLeft, Menu, X } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, Users, ArrowLeft, Menu, X, Lock, KeyRound, ShieldAlert } from "lucide-react";
 
 export default function AdminLayout({
   children,
@@ -11,12 +11,44 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [passcode, setPasscode] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   const pathname = usePathname();
+  const CORRECT_PASSCODE = "cocosam2026";
+
+  // Check auth session on mount
+  useEffect(() => {
+    const sessionAuth = sessionStorage.getItem("cocosam_admin_auth");
+    if (sessionAuth === "true") {
+      setIsAuthorized(true);
+    }
+    setIsLoading(false);
+  }, []);
 
   // Close sidebar automatically on mobile when route changes
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [pathname]);
+
+  const handleUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passcode === CORRECT_PASSCODE) {
+      sessionStorage.setItem("cocosam_admin_auth", "true");
+      setIsAuthorized(true);
+      setErrorMsg("");
+    } else {
+      setErrorMsg("Passcode salah! Silakan coba lagi.");
+      setPasscode("");
+    }
+  };
+
+  const handleLock = () => {
+    sessionStorage.removeItem("cocosam_admin_auth");
+    setIsAuthorized(false);
+  };
 
   const sidebarItems = [
     { name: "Dashboard", href: "/admin", icon: <LayoutDashboard className="w-5 h-5" /> },
@@ -24,6 +56,67 @@ export default function AdminLayout({
     { name: "Pelanggan (Customers)", href: "/admin/customers", icon: <Users className="w-5 h-5" /> },
   ];
 
+  // Loading state to prevent flash of lockscreen when session is valid
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-brand-cream-100 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-green-700" />
+      </div>
+    );
+  }
+
+  // Display Lock Screen if not authorized
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-brand-cream-100 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-brand-green-100 shadow-xl text-center space-y-6">
+          <div className="w-16 h-16 rounded-full bg-brand-green-50 text-brand-green-600 flex items-center justify-center mx-auto shadow-inner border border-brand-green-100/50">
+            <Lock className="w-8 h-8" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Protected Admin Area</h1>
+            <p className="text-gray-500 text-sm mt-1">Masukkan passcode khusus untuk mengakses dashboard administrasi B2B.</p>
+          </div>
+
+          {errorMsg && (
+            <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-xs rounded-xl font-semibold flex items-center justify-center gap-1.5">
+              <ShieldAlert className="w-4 h-4 flex-shrink-0" />
+              <span>{errorMsg}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleUnlock} className="space-y-4">
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
+                <KeyRound className="w-5 h-5" />
+              </span>
+              <input
+                required
+                type="password"
+                placeholder="Passcode Admin"
+                value={passcode}
+                onChange={(e) => setPasscode(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-green-500 text-center font-bold tracking-widest bg-gray-50/50"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-brand-green-500 hover:bg-brand-green-600 text-white font-bold py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
+            >
+              Masuk Dashboard
+            </button>
+          </form>
+          <div className="pt-2">
+            <Link href="/" className="text-xs font-semibold text-brand-green-700 hover:underline">
+              ← Kembali ke Halaman Utama
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Display Admin Dashboard when authorized
   return (
     <div className="flex min-h-screen bg-gray-50 text-gray-800 relative">
       {/* Mobile Sidebar Overlay Backdrop */}
@@ -84,10 +177,18 @@ export default function AdminLayout({
         </nav>
 
         {/* Footer info & Exit */}
-        <div className="p-4 border-t border-brand-green-800">
+        <div className="p-4 border-t border-brand-green-800 space-y-2">
+          <button
+            onClick={handleLock}
+            className="flex items-center justify-center space-x-2 w-full bg-red-800/80 hover:bg-red-700 text-white py-2 rounded-xl font-bold text-xs transition-all"
+          >
+            <Lock className="w-4 h-4" />
+            <span>Kunci Panel Admin</span>
+          </button>
+          
           <Link
             href="/"
-            className="flex items-center justify-center space-x-2 w-full bg-brand-green-800 hover:bg-brand-green-700 text-white py-2.5 rounded-xl font-bold text-sm transition-all"
+            className="flex items-center justify-center space-x-2 w-full bg-brand-green-800 hover:bg-brand-green-700 text-white py-2.5 rounded-xl font-bold text-xs transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Kembali ke Web</span>
