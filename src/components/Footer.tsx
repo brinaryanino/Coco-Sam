@@ -42,6 +42,7 @@ export default function Footer() {
               <li><a href="#kenapa-kami" className="hover:text-white transition-colors">Kenapa Pilih Kami</a></li>
               <li><a href="#produk" className="hover:text-white transition-colors">Spesifikasi Produk</a></li>
               <li><a href="#testimoni" className="hover:text-white transition-colors">Testimoni Mitra</a></li>
+              <li><a href="/admin" className="opacity-20 hover:opacity-100 transition-opacity text-xs mt-1 block">Portal Admin</a></li>
             </ul>
           </div>
 
