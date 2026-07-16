@@ -18,21 +18,21 @@ export default function Hero() {
             {/* Tagline Badge */}
             <div className="inline-flex items-center self-center lg:self-start space-x-2 bg-brand-green-100/60 border border-brand-green-200/50 px-4 py-1.5 rounded-full text-brand-green-800 font-semibold text-xs uppercase tracking-wider mb-6 animate-pulse">
               <Leaf className="w-3.5 h-3.5 fill-brand-green-800" />
-              <span>Premium B2B Supply — Lombok, Indonesia</span>
+              <span>Premium B2B Supply — 100% Produk Asli Lombok</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-none mb-6">
-              Turunkan Kolesterol, <br className="hidden sm:inline" />
+              Kemurnian Alami <br className="hidden sm:inline" />
               <span className="text-brand-green-500 bg-gradient-to-r from-brand-green-600 to-brand-green-400 bg-clip-text text-transparent">
-                Jaga Metabolisme
+                Asli Pulau Lombok
               </span>
             </h1>
 
             {/* Sub-headline */}
             <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              Virgin Coconut Oil (VCO) 100% murni dan dingin (cold-pressed) untuk kebutuhan rutin bisnis{" "}
-              <span className="font-semibold text-brand-green-700">SPA, Resto, Hotel, dan Villa</span> kamu.
+              Virgin Coconut Oil (VCO) premium hasil cold-press kelapa segar pesisir Lombok. Diproses higienis untuk menyuplai kebutuhan rutin eksklusif{" "}
+              <span className="font-semibold text-brand-green-700">SPA, Hotel, Villa, dan Restoran</span> Anda.
             </p>
 
             {/* CTA Buttons */}

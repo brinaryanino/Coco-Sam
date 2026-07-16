@@ -19,6 +19,7 @@ async function main() {
       size: "100ml",
       basePrice: 35000,
       stock: 150,
+      category: "VCO",
     },
   });
 
@@ -29,6 +30,7 @@ async function main() {
       size: "1L",
       basePrice: 180000,
       stock: 50,
+      category: "VCO",
     },
   });
 
@@ -39,6 +41,7 @@ async function main() {
       size: "5L",
       basePrice: 750000,
       stock: 20,
+      category: "VCO",
     },
   });
 
@@ -49,6 +52,7 @@ async function main() {
       size: "20L",
       basePrice: 2800000,
       stock: 10,
+      category: "VCO",
     },
   });
 

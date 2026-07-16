@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingCart, Users, ArrowLeft, Menu, X, Lock, KeyRound, ShieldAlert } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, Users, Package, ArrowLeft, Menu, X, Lock, KeyRound, ShieldAlert } from "lucide-react";
 
 export default function AdminLayout({
   children,
@@ -54,6 +54,7 @@ export default function AdminLayout({
     { name: "Dashboard", href: "/admin", icon: <LayoutDashboard className="w-5 h-5" /> },
     { name: "Pesanan (Orders)", href: "/admin/orders", icon: <ShoppingCart className="w-5 h-5" /> },
     { name: "Pelanggan (Customers)", href: "/admin/customers", icon: <Users className="w-5 h-5" /> },
+    { name: "Produk (Products)", href: "/admin/products", icon: <Package className="w-5 h-5" /> },
   ];
 
   // Loading state to prevent flash of lockscreen when session is valid
