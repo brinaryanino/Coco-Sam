@@ -18,7 +18,7 @@ export default function Hero() {
             {/* Tagline Badge */}
             <div className="inline-flex items-center self-center lg:self-start space-x-2 bg-brand-green-100/60 border border-brand-green-200/50 px-4 py-1.5 rounded-full text-brand-green-800 font-semibold text-xs uppercase tracking-wider mb-6 animate-pulse">
               <Leaf className="w-3.5 h-3.5 fill-brand-green-800" />
-              <span>Premium B2B Supply — 100% Produk Asli Lombok</span>
+              <span>100% Produk Asli Lombok</span>
             </div>
 
             {/* Headline */}
