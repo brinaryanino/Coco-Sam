@@ -16,12 +16,12 @@ import {
 export default function ProductionProcess() {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = [
+    const steps = [
     {
       title: "Sumber Kelapa Pilihan",
       shortTitle: "Sumber Kelapa",
       desc: "Dipanen langsung dari perkebunan pesisir Pulau Lombok oleh petani lokal mitra IKM Al-Amin. Kami hanya memilih kelapa matang segar pilihan untuk menghasilkan VCO dengan kualitas terbaik, rasa lembut, dan aroma khas kelapa segar.",
-      image: "/image3.jpg",
+      image: "/fresh-coconut.jpg",
       icon: <TreePine className="w-6 h-6" />,
       highlights: ["Kelapa Pesisir Lombok", "Petani Lokal Mitra", "Matang & Segar"],
     },
@@ -29,7 +29,7 @@ export default function ProductionProcess() {
       title: "Proses Pembersihan",
       shortTitle: "Pembersihan",
       desc: "Kelapa segar yang dikupas segera dipisahkan dari tempurungnya. Daging kelapa dicuci bersih menggunakan air steril mengalir secara higienis untuk mengeliminasi potensi kontaminan sebelum masuk ke tahap ekstraksi.",
-      image: "/image1.jpg",
+      image: "/pembersihan.jpg",
       icon: <Sparkles className="w-6 h-6" />,
       highlights: ["Pencucian Air Steril", "Higienitas Terjaga", "Bebas Kontaminan"],
     },
@@ -37,12 +37,20 @@ export default function ProductionProcess() {
       title: "Cold Process (Cold Press)",
       shortTitle: "Cold Process",
       desc: "Diekstrak dengan metode cold-press mekanis tanpa pemanasan sedikit pun (non-thermal). Suhu dingin konstan selama pengepresan menjaga kandungan asam laurat, antioksidan, dan nutrisi alami kelapa tetap utuh sempurna.",
-      image: "/image4.jpg",
+      image: "/cold-process.jpg",
       icon: <Zap className="w-6 h-6" />,
       highlights: ["Metode Non-Thermal", "Kandungan Nutrisi Utuh", "Asam Laurat Tinggi"],
     },
     {
-      title: "Quality Control (QC)",
+      title: "Proses Filterisasi",
+      shortTitle: "Filterisasi",
+      desc: "Minyak kelapa murni disaring berlapis menggunakan mikro-filter steril untuk memisahkan sisa ampas kelapa dan air secara sempurna, menghasilkan VCO dengan tingkat kejernihan tinggi tanpa merusak nutrisi kelapa.",
+      image: "/filterisasi.jpg",
+      icon: <Sparkles className="w-6 h-6" />,
+      highlights: ["Penyaringan Berlapis", "Mikro-Filter Steril", "Kadar Air Terendah"],
+    },
+    {
+      title: "Quality Control (QC) Ketat",
       shortTitle: "QC Ketat",
       desc: "Setiap batch minyak kelapa murni diuji secara teliti untuk memastikan kadar air terendah (< 0.1%), kejernihan kristal bening, serta aroma khas kelapa segar bebas bau tengik sesuai standar BPOM RI dan Halal Indonesia.",
       image: "/image5.jpg",
@@ -50,20 +58,12 @@ export default function ProductionProcess() {
       highlights: ["Uji Kejernihan", "Kadar Air < 0.1%", "Sertifikasi BPOM & Halal"],
     },
     {
-      title: "Pengemasan Steril",
-      shortTitle: "Pengemasan",
-      desc: "Produk dikemas di ruangan steril berstandar sanitasi tinggi ke dalam wadah kaca dan plastik food-grade berkualitas premium. Setiap botol disegel rapat dengan segel ganda untuk mengunci kesegaran hingga ke tangan konsumen.",
-      image: "/image2.jpg",
-      icon: <Package className="w-6 h-6" />,
-      highlights: ["Kemasan Food-Grade", "Segel Ganda Pengaman", "Ruangan Steril"],
-    },
-    {
-      title: "Pemasaran & Distribusi",
-      shortTitle: "Distribusi",
-      desc: "VCO yang dikemas didistribusikan secara terjadwal dengan armada khusus langsung ke SPA, Hotel, Villa, dan Restoran mitra. Kami menjamin ketepatan waktu pengiriman B2B untuk menjaga kelancaran operasional bisnis Anda.",
-      image: "/image1.jpg",
+      title: "Pengemasan & Distribusi B2B",
+      shortTitle: "Distribusi B2B",
+      desc: "VCO dikemas secara steril ke wadah food-grade premium dan didistribusikan secara terjadwal langsung ke Hotel, Spa, Villa, dan Restoran mitra. Kami menjamin armada khusus untuk ketepatan waktu pengiriman.",
+      image: "/distribusi-proses.jpg",
       icon: <Truck className="w-6 h-6" />,
-      highlights: ["Pengiriman Tepat Waktu", "Armada Khusus B2B", "Layanan Mitra Prioritas"],
+      highlights: ["Armada Khusus B2B", "Kemasan Premium", "Pengiriman Terjadwal"],
     },
   ];
 
