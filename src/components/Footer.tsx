@@ -42,6 +42,7 @@ export default function Footer() {
               <li><a href="#kenapa-kami" className="hover:text-white transition-colors">Kenapa Pilih Kami</a></li>
               <li><a href="#produk" className="hover:text-white transition-colors">Spesifikasi Produk</a></li>
               <li><a href="#testimoni" className="hover:text-white transition-colors">Testimoni Mitra</a></li>
+              <li><a href="#tentang-kami" className="hover:text-white transition-colors">Tentang Kami</a></li>
               <li><a href="/admin" className="opacity-20 hover:opacity-100 transition-opacity text-xs mt-1 block">Portal Admin</a></li>
             </ul>
           </div>
@@ -74,7 +75,7 @@ export default function Footer() {
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-green-300">
           <p>© {currentYear} CocoSam Lombok. All rights reserved.</p>
-          <p>Diproduksi oleh IKM Al-Amin, Lombok - Indonesia</p>
+          <p>Diproduksi oleh CocoSam, Lombok - Indonesia</p>
         </div>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import Stats from "@/components/Stats";
 import ProductDetail from "@/components/ProductDetail";
 import Testimonials from "@/components/Testimonials";
 import ProductionProcess from "@/components/ProductionProcess";
+import AboutUs from "@/components/AboutUs";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { getLandingStats } from "@/app/actions/products";
@@ -29,6 +30,7 @@ export default async function Home() {
         <ProductDetail />
         <Testimonials />
         <ProductionProcess />
+        <AboutUs />
         <CTA />
       </main>
       <Footer />

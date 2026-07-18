@@ -74,7 +74,7 @@ export default function OrdersPageClient({
         .map((item: any) => `- ${item.product.name} (${item.product.size}) x ${item.quantity} @${formatRp(item.unitPrice)}`)
         .join("\n");
 
-      text = `Halo ${pic},\n\nBerikut rincian tagihan pesanan VCO CocoSam Anda untuk *${customerName}*:\n\n*Nomor Invoice:* ${invoiceNum}\n*Detail Pesanan:*\n${itemsList}\n\n*Total Tagihan:* *${totalAmount}*\n*Status Pembayaran:* ${order.paymentStatus}\n\nPembayaran dapat dilakukan melalui transfer bank ke:\n🏦 *Bank BCA*\n*No. Rekening:* 123456789\n*Atas Nama:* IKM Al-Amin\n\nJika sudah melakukan pembayaran, mohon kirimkan bukti transfer di chat ini. Terima kasih! 🙏🥥`;
+      text = `Halo ${pic},\n\nBerikut rincian tagihan pesanan VCO CocoSam Anda untuk *${customerName}*:\n\n*Nomor Invoice:* ${invoiceNum}\n*Detail Pesanan:*\n${itemsList}\n\n*Total Tagihan:* *${totalAmount}*\n*Status Pembayaran:* ${order.paymentStatus}\n\nPembayaran dapat dilakukan melalui transfer bank ke:\n🏦 *Bank BCA*\n*No. Rekening:* 123456789\n*Atas Nama:* CocoSam\n\nJika sudah melakukan pembayaran, mohon kirimkan bukti transfer di chat ini. Terima kasih! 🙏🥥`;
     } else if (type === "PAYMENT") {
       const totalPaid = order.payments.reduce((sum: number, p: any) => sum + p.amount, 0);
       const remaining = Math.max(0, order.totalAmount - totalPaid);

@@ -67,9 +67,9 @@ export default function Hero() {
               <div className="flex flex-col items-center lg:items-start">
                 <div className="flex items-center space-x-1.5 text-brand-green-600 mb-1">
                   <ShieldCheck className="w-5 h-5 text-blue-600" />
-                  <span className="font-bold text-xs uppercase tracking-wider text-gray-800">BPOM RI</span>
+                  <span className="font-bold text-xs uppercase tracking-wider text-gray-800">Izin P-IRT</span>
                 </div>
-                <span className="text-[11px] text-gray-500 text-center lg:text-left">Terdaftar Resmi</span>
+                <span className="text-[11px] text-gray-500 text-center lg:text-left">Dinas Kesehatan</span>
               </div>
             </div>
           </div>

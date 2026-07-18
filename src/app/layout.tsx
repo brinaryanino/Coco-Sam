@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CocoSam | Virgin Coconut Oil (VCO) Murni B2B Supply Lombok",
   description: "Virgin Coconut Oil (VCO) 100% murni dan dingin (cold-pressed) diproduksi higienis di Lombok. Mitra supply resmi untuk SPA, Restoran, Hotel, dan Villa. Hubungi kami untuk bulk order.",
-  keywords: ["VCO Lombok", "Virgin Coconut Oil Lombok", "VCO B2B", "Minyak Kelapa Murni Lombok", "Supply Hotel Lombok", "VCO Spa Lombok", "IKM Al-Amin Lombok"],
+  keywords: ["VCO Lombok", "Virgin Coconut Oil Lombok", "VCO B2B", "Minyak Kelapa Murni Lombok", "Supply Hotel Lombok", "VCO Spa Lombok", "CocoSam Lombok"],
   openGraph: {
     title: "CocoSam | Virgin Coconut Oil (VCO) Murni B2B Supply Lombok",
     description: "Virgin Coconut Oil (VCO) 100% murni untuk kebutuhan SPA, Restoran, Hotel, dan Villa di Lombok. Layanan custom size & private label.",

@@ -20,7 +20,7 @@ export default function ProductionProcess() {
     {
       title: "Sumber Kelapa Pilihan",
       shortTitle: "Sumber Kelapa",
-      desc: "Dipanen langsung dari perkebunan pesisir Pulau Lombok oleh petani lokal mitra IKM Al-Amin. Kami hanya memilih kelapa matang segar pilihan untuk menghasilkan VCO dengan kualitas terbaik, rasa lembut, dan aroma khas kelapa segar.",
+      desc: "Dipanen langsung dari perkebunan pesisir Pulau Lombok oleh petani lokal mitra CocoSam. Kami hanya memilih kelapa matang segar pilihan untuk menghasilkan VCO dengan kualitas terbaik, rasa lembut, dan aroma khas kelapa segar.",
       image: "/fresh-coconut.jpg",
       icon: <TreePine className="w-6 h-6" />,
       highlights: ["Kelapa Pesisir Lombok", "Petani Lokal Mitra", "Matang & Segar"],
@@ -52,10 +52,10 @@ export default function ProductionProcess() {
     {
       title: "Quality Control (QC) Ketat",
       shortTitle: "QC Ketat",
-      desc: "Setiap batch minyak kelapa murni diuji secara teliti untuk memastikan kadar air terendah (< 0.1%), kejernihan kristal bening, serta aroma khas kelapa segar bebas bau tengik sesuai standar BPOM RI dan Halal Indonesia.",
+      desc: "Setiap batch minyak kelapa murni diuji secara teliti untuk memastikan kadar air terendah (< 0.1%), kejernihan kristal bening, serta aroma khas kelapa segar bebas bau tengik sesuai standar izin edar P-IRT dan Halal Indonesia.",
       image: "/image5.jpg",
       icon: <ShieldCheck className="w-6 h-6" />,
-      highlights: ["Uji Kejernihan", "Kadar Air < 0.1%", "Sertifikasi BPOM & Halal"],
+      highlights: ["Uji Kejernihan", "Kadar Air < 0.1%", "Izin P-IRT & Halal"],
     },
     {
       title: "Pengemasan & Distribusi B2B",

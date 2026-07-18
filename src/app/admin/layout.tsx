@@ -195,7 +195,7 @@ export default function AdminLayout({
             <span>Kembali ke Web</span>
           </Link>
           <div className="mt-4 text-[10px] text-brand-green-300 text-center uppercase tracking-wider font-semibold">
-            Diproduksi oleh IKM Al-Amin
+            Diproduksi oleh CocoSam
           </div>
         </div>
       </aside>

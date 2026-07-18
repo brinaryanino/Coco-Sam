@@ -12,6 +12,7 @@ export default function Navbar() {
     { name: "Kenapa Kami", href: "#kenapa-kami" },
     { name: "Produk", href: "#produk" },
     { name: "Testimoni", href: "#testimoni" },
+    { name: "Tentang Kami", href: "#tentang-kami" },
   ];
 
   const waLink = "https://wa.me/6285337280512?text=Halo%20CocoSam%2C%20saya%20tertarik%20untuk%20kerja%20sama%20supply%20VCO%20untuk%20bisnis%20saya";

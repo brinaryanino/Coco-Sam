@@ -15,7 +15,7 @@ export default function TrustBadges() {
             <div className="h-4 w-px bg-brand-green-600 hidden sm:block" />
             <div className="flex items-center space-x-2">
               <ShieldCheck className="w-5 h-5 text-brand-green-300" />
-              <span className="text-sm font-semibold tracking-wider uppercase">BPOM RI Approved</span>
+              <span className="text-sm font-semibold tracking-wider uppercase">Izin P-IRT Approved</span>
             </div>
             <div className="h-4 w-px bg-brand-green-600 hidden sm:block" />
             <div className="flex items-center space-x-2">
@@ -26,7 +26,7 @@ export default function TrustBadges() {
 
           {/* IKM Al-Amin Lombok Label */}
           <div className="text-xs sm:text-sm font-medium text-brand-green-100 bg-brand-green-800/80 px-4 py-1.5 rounded-full border border-brand-green-600/30">
-            Diproduksi oleh: <span className="font-bold text-white">IKM Al-Amin, Lombok - Indonesia</span>
+            Diproduksi oleh: <span className="font-bold text-white">CocoSam, Lombok - Indonesia</span>
           </div>
         </div>
       </div>

@@ -106,7 +106,7 @@ export default function Stats({ activeMitra, totalSold }: StatsProps) {
     {
       title: "Kapasitas Produksi",
       value: "5.000 L / bln",
-      desc: "Kemampuan supply stabil IKM Al-Amin untuk memenuhi kebutuhan rantai bisnis B2B.",
+      desc: "Kemampuan supply stabil CocoSam untuk memenuhi kebutuhan rantai bisnis B2B.",
       icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
       bg: "from-blue-50/30 to-blue-100/10 border-blue-100/40",
     },

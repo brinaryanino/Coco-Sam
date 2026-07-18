@@ -21,7 +21,7 @@ export default function B2BFocus() {
     {
       icon: <ShieldCheck className="w-8 h-8 text-brand-green-600" />,
       title: "Kualitas Premium Terpercaya",
-      desc: "Diproduksi secara higienis di Lombok. Telah bersertifikasi Halal & BPOM untuk memberikan jaminan keamanan bagi tamu dan pelanggan Anda.",
+      desc: "Diproduksi secara higienis di Lombok. Telah bersertifikasi Halal & memiliki izin edar P-IRT untuk memberikan jaminan keamanan bagi tamu dan pelanggan Anda.",
     },
   ];
 
