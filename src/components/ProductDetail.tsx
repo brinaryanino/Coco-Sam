@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ListChecks } from "lucide-react";
 
 export default function ProductDetail() {
-  const images = ["/image2.jpg", "/image3.jpg", "/image4.jpg", "/image5.jpg"];
+  const images = ["/image2.jpg", "/image3.jpg", "/image4.png", "/image5.jpg"];
   const [activeImage, setActiveImage] = useState("/image2.jpg");
 
   return (

@@ -79,8 +79,8 @@ export default function Hero() {
             {/* Outer soft glow card */}
             <div className="relative w-[320px] h-[440px] sm:w-[360px] sm:h-[485px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300">
               <Image
-                src="/image1.jpg"
-                alt="CocoSam Virgin Coconut Oil Lombok Sunset Shot"
+                src="/header-img.png"
+                alt="CocoSam Virgin Coconut Oil Lombok"
                 fill
                 priority
                 className="object-cover"

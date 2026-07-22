@@ -179,7 +179,13 @@ export async function deleteProductAdmin(id: string) {
 // Fetch stats for the landing page counter
 export async function getLandingStats() {
   try {
-    const activeMitra = await prisma.customer.count({
+    const settings = await prisma.setting.findMany();
+    const settingsMap: Record<string, string> = {};
+    settings.forEach((s) => {
+      settingsMap[s.key] = s.value;
+    });
+
+    const dbActiveMitra = await prisma.customer.count({
       where: { status: "ACTIVE" },
     });
 
@@ -194,19 +200,95 @@ export async function getLandingStats() {
       },
     });
 
-    const totalSold = sumResult._sum.quantity || 0;
+    const dbTotalSold = sumResult._sum.quantity || 0;
+
+    const activeMitra = settingsMap["stats_mitra_count"]
+      ? parseInt(settingsMap["stats_mitra_count"], 10)
+      : 42 + dbActiveMitra;
+
+    const totalSold = settingsMap["stats_sold_count"]
+      ? parseInt(settingsMap["stats_sold_count"], 10)
+      : 1420 + dbTotalSold;
+
+    const satisfactionRate = settingsMap["stats_satisfaction"] || "99.4%";
+    const productionCapacity = settingsMap["stats_capacity"] || "5.000 L / bln";
 
     return {
       success: true,
       activeMitra,
       totalSold,
+      satisfactionRate,
+      productionCapacity,
     };
   } catch (error: any) {
     console.error("getLandingStats error:", error);
     return {
       success: false,
-      activeMitra: 0,
-      totalSold: 0,
+      activeMitra: 42,
+      totalSold: 1420,
+      satisfactionRate: "99.4%",
+      productionCapacity: "5.000 L / bln",
+    };
+  }
+}
+
+export async function updateSiteStats(data: {
+  mitraCount: string;
+  soldCount: string;
+  satisfactionRate: string;
+  productionCapacity: string;
+}) {
+  try {
+    const items = [
+      { key: "stats_mitra_count", value: data.mitraCount },
+      { key: "stats_sold_count", value: data.soldCount },
+      { key: "stats_satisfaction", value: data.satisfactionRate },
+      { key: "stats_capacity", value: data.productionCapacity },
+    ];
+
+    for (const item of items) {
+      await prisma.setting.upsert({
+        where: { key: item.key },
+        update: { value: item.value },
+        create: { key: item.key, value: item.value },
+      });
+    }
+
+    revalidatePath("/");
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error: any) {
+    console.error("updateSiteStats error:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function getSiteStatsSettings() {
+  try {
+    const settings = await prisma.setting.findMany();
+    const settingsMap: Record<string, string> = {};
+    settings.forEach((s) => {
+      settingsMap[s.key] = s.value;
+    });
+
+    return {
+      success: true,
+      data: {
+        mitraCount: settingsMap["stats_mitra_count"] || "42",
+        soldCount: settingsMap["stats_sold_count"] || "1420",
+        satisfactionRate: settingsMap["stats_satisfaction"] || "99.4%",
+        productionCapacity: settingsMap["stats_capacity"] || "5.000 L / bln",
+      },
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      data: {
+        mitraCount: "42",
+        soldCount: "1420",
+        satisfactionRate: "99.4%",
+        productionCapacity: "5.000 L / bln",
+      },
     };
   }
 }

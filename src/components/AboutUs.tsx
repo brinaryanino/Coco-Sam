@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Info, Target, Users, BookOpen, CheckCircle } from "lucide-react";
+import { Info, Target, Users, BookOpen, CheckCircle, Camera } from "lucide-react";
 
 export default function AboutUs() {
   const [activeTab, setActiveTab] = useState<"desc" | "vision" | "structure">("desc");
@@ -105,6 +105,17 @@ export default function AboutUs() {
                 <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                   CocoSam tidak hanya berfokus pada produksi, tetapi juga mengusung konsep <strong>community-based enterprise</strong>, di mana masyarakat desa dilibatkan secara aktif dalam seluruh rantai nilai usaha, mulai dari pengadaan bahan baku, proses produksi, hingga pemasaran produk. Dengan pendekatan tersebut, CocoSam hadir bukan hanya sebagai unit bisnis, tetapi juga sebagai motor penggerak ekonomi desa yang berorientasi pada keberlanjutan (sustainability), kemandirian, dan peningkatan kesejahteraan masyarakat.
                 </p>
+                <div className="pt-2">
+                  <a
+                    href="/dokumentasi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-brand-green-500 hover:bg-brand-green-600 text-white font-bold px-5 py-3 rounded-xl text-xs sm:text-sm shadow-md hover:shadow-lg transition-all"
+                  >
+                    <Camera className="w-4 h-4" />
+                    <span>Lihat Foto Dokumentasi & Kegiatan ↗</span>
+                  </a>
+                </div>
               </div>
               <div className="lg:col-span-5 relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-md border border-brand-green-100/50">
                 <Image

@@ -13,12 +13,13 @@ export default function Navbar() {
     { name: "Produk", href: "#produk" },
     { name: "Testimoni", href: "#testimoni" },
     { name: "Tentang Kami", href: "#tentang-kami" },
+    { name: "Dokumentasi ↗", href: "/dokumentasi", target: "_blank" },
   ];
 
   const waLink = "https://wa.me/6285337280512?text=Halo%20CocoSam%2C%20saya%20tertarik%20untuk%20kerja%20sama%20supply%20VCO%20untuk%20bisnis%20saya";
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-brand-green-100 shadow-sm transition-all duration-300">
+    <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-brand-green-100 shadow-xs transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
@@ -55,6 +56,8 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
+                target={item.target}
+                rel={item.target ? "noopener noreferrer" : undefined}
                 className="text-gray-600 hover:text-brand-green-700 font-medium transition-colors duration-200"
               >
                 {item.name}
@@ -91,6 +94,8 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
+              target={item.target}
+              rel={item.target ? "noopener noreferrer" : undefined}
               onClick={() => setIsOpen(false)}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-green-700 hover:bg-brand-green-50 rounded-lg transition-all duration-200"
             >

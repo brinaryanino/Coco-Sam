@@ -6,11 +6,18 @@ import { Users, ShoppingBag, Star, ShieldCheck } from "lucide-react";
 interface StatsProps {
   activeMitra: number;
   totalSold: number;
+  satisfactionRate?: string;
+  productionCapacity?: string;
 }
 
-export default function Stats({ activeMitra, totalSold }: StatsProps) {
-  const targetMitra = 42 + activeMitra;
-  const targetSold = 1420 + totalSold;
+export default function Stats({ 
+  activeMitra, 
+  totalSold, 
+  satisfactionRate = "99.4%", 
+  productionCapacity = "5.000 L / bln" 
+}: StatsProps) {
+  const targetMitra = activeMitra || 42;
+  const targetSold = totalSold || 1420;
 
   const [mitraCount, setMitraCount] = useState(0);
   const [soldCount, setSoldCount] = useState(0);
@@ -46,7 +53,7 @@ export default function Stats({ activeMitra, totalSold }: StatsProps) {
     // Animate Mitra Count (0 to targetMitra)
     let mitraStart = 0;
     const mitraDuration = 1200; // 1.2 seconds
-    const mitraStep = Math.max(Math.floor(mitraDuration / targetMitra), 15);
+    const mitraStep = Math.max(Math.floor(mitraDuration / Math.max(targetMitra, 1)), 15);
 
     const mitraTimer = setInterval(() => {
       mitraStart += 1;
@@ -63,7 +70,7 @@ export default function Stats({ activeMitra, totalSold }: StatsProps) {
     const soldDuration = 1800; // 1.8 seconds
     const soldFps = 40;
     const totalTicks = Math.floor((soldDuration / 1000) * soldFps);
-    const soldIncrement = Math.ceil(targetSold / totalTicks);
+    const soldIncrement = Math.ceil(targetSold / Math.max(totalTicks, 1));
 
     const soldTimer = setInterval(() => {
       soldStart += soldIncrement;
@@ -98,14 +105,14 @@ export default function Stats({ activeMitra, totalSold }: StatsProps) {
     },
     {
       title: "Tingkat Kepuasan Mitra",
-      value: "99.4%",
+      value: satisfactionRate,
       desc: "Survei loyalitas berkala atas ketepatan pengiriman dan standar kemurnian VCO.",
       icon: <Star className="w-6 h-6 text-amber-500 fill-amber-500/10" />,
       bg: "from-amber-50/30 to-amber-100/10 border-amber-100/40",
     },
     {
       title: "Kapasitas Produksi",
-      value: "5.000 L / bln",
+      value: productionCapacity,
       desc: "Kemampuan supply stabil CocoSam untuk memenuhi kebutuhan rantai bisnis B2B.",
       icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
       bg: "from-blue-50/30 to-blue-100/10 border-blue-100/40",

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getDashboardStats } from "@/app/actions/sales";
 import { DollarSign, ShoppingBag, Users, Calendar, ArrowUpRight } from "lucide-react";
+import StatsManager from "./StatsManager";
 
 export const dynamic = "force-dynamic";
 
@@ -97,6 +98,9 @@ export default async function AdminDashboardPage() {
           </div>
         ))}
       </div>
+
+      {/* Editable Landing Page Stats Control Panel */}
+      <StatsManager />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Recent Orders List */}
