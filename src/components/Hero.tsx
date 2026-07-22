@@ -76,8 +76,7 @@ export default function Hero() {
 
           {/* Image Showcase */}
           <div className="lg:col-span-5 relative flex justify-center">
-            {/* Outer soft glow card */}
-            <div className="relative w-[320px] h-[440px] sm:w-[360px] sm:h-[485px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="relative w-[320px] h-[440px] sm:w-[360px] sm:h-[485px] rounded-3xl overflow-hidden">
               <Image
                 src="/header-img.png"
                 alt="CocoSam Virgin Coconut Oil Lombok"
@@ -86,16 +85,7 @@ export default function Hero() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              {/* Overlay shadow bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              {/* Image floating badge */}
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-xs uppercase tracking-widest text-brand-green-300 font-bold mb-1">Original Product Shot</p>
-                <h3 className="text-lg font-bold leading-tight">Diproduksi Langsung di Lombok, Nusa Tenggara Barat</h3>
-              </div>
             </div>
-            {/* Background circular detail */}
-            <div className="absolute -z-10 -right-6 -bottom-6 w-full h-full border-2 border-dashed border-brand-green-200 rounded-3xl pointer-events-none" />
           </div>
         </div>
       </div>
