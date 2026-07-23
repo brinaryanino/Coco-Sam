@@ -74,7 +74,7 @@ export default function Hero() {
           <div className="lg:col-span-5 relative flex justify-center mt-4 lg:mt-0">
             <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[360px] lg:max-w-[420px] aspect-[4/5] rounded-3xl overflow-hidden bg-white">
               <Image
-                src="/hero-image.png"
+                src="/header-img.png"
                 alt="CocoSam Virgin Coconut Oil Lombok"
                 fill
                 priority
