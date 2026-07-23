@@ -125,11 +125,11 @@ export default function Stats({
       className="py-16 bg-white relative overflow-hidden border-t border-gray-100"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className={`p-8 rounded-3xl border bg-gradient-to-br ${card.bg} shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between`}
+              className={`p-6 sm:p-8 rounded-3xl border bg-gradient-to-br ${card.bg} shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between`}
             >
               <div className="space-y-4">
                 <div className="p-3 bg-white rounded-2xl shadow-xs border border-gray-100/50 w-fit">
