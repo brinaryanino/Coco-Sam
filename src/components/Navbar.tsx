@@ -43,7 +43,7 @@ export default function Navbar() {
           <a href="#hero" className="flex items-center space-x-2.5 group">
             <div className="relative w-10 h-10 flex-shrink-0">
               <Image
-                src="/hero-image.png"
+                src="/header-img.png"
                 alt="CocoSam Logo"
                 fill
                 className="object-contain transform group-hover:scale-105 transition-transform duration-300"
