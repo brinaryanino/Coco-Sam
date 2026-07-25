@@ -195,8 +195,11 @@ export default function AdminLayout({
             <ArrowLeft className="w-4 h-4" />
             <span>Kembali ke Web</span>
           </Link>
-          <div className="mt-4 text-[10px] text-brand-green-300 text-center uppercase tracking-wider font-semibold">
-            Diproduksi oleh CocoSam
+          <div className="mt-3 pt-2 border-t border-brand-green-800/60 text-[10px] text-brand-green-300/80 text-center tracking-wider">
+            <span>Diproduksi oleh CocoSam</span>
+            <div className="text-[9px] text-brand-green-400/60 mt-0.5">
+              System built by <span className="font-semibold text-brand-green-300">@brnryanino</span>
+            </div>
           </div>
         </div>
       </aside>

@@ -76,7 +76,13 @@ export default function Footer() {
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-green-300">
           <p>© {currentYear} CocoSam Lombok. All rights reserved.</p>
-          <p>Diproduksi oleh CocoSam, Lombok - Indonesia</p>
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+            <p>Diproduksi oleh CocoSam, Lombok - Indonesia</p>
+            <span className="hidden sm:inline text-brand-green-600">•</span>
+            <p className="text-[11px] text-brand-green-400/70 hover:text-brand-green-200 transition-colors">
+              Developed by <span className="font-semibold text-brand-green-300">@brnryanino</span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
