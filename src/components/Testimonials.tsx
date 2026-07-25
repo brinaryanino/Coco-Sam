@@ -1,67 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Quote, Star, Building2, User } from "lucide-react";
+import { getTestimonialsList } from "@/app/actions/testimonials";
+
+interface TestimonialItem {
+  id: string;
+  category: string;
+  categoryLabel: string;
+  author: string;
+  role: string;
+  quote: string;
+  highlight: boolean;
+}
 
 export default function Testimonials() {
   const [filter, setFilter] = useState<"ALL" | "MITRA" | "KONSUMEN">("ALL");
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const testimonials = [
-    {
-      category: "MITRA",
-      categoryLabel: "Mitra Bisnis",
-      author: "Matcha Spa Kuta",
-      role: "Mitra Bisnis B2B",
-      quote: "Kami membeli produk Cocosam ini untuk dijual kembali. Kualitas produknya konsisten, kemasan bagus, dan respon penjual sangat baik. Semoga kualitasnya selalu terjaga.✨✨",
-      bgColor: "bg-brand-green-50/40",
-      borderColor: "border-brand-green-100",
-      highlight: false,
-    },
-    {
-      category: "MITRA",
-      categoryLabel: "Mitra Bisnis",
-      author: "Nusa Tenggara for Nusantara Foundation",
-      role: "Yayasan / Mitra Kerjasama",
-      quote: "Cocosam memberikan pelayanan kerja sama yang ramah dan nyaman. Great product!\n\nSaya selalu tertarik dengan produk lokal. Produk yang bahan bakunya berasal dari daerah sendiri, diolah oleh masyarakat lokal, dan turut memberdayakan komunitas di sekitarnya. CocoSam adalah salah satunya. Keren banget!\n\nSelain berkualitas, CocoSam juga bisa menjadi pilihan hadiah atau oleh-oleh yang berkesan untuk membawa sedikit cerita tentang Lombok. Saya sudah beberapa kali menghadiahkan produk CocoSam kepada teman-teman dari luar negeri, dan mereka semua suka. Bravo, CocoSam! 👏",
-      bgColor: "bg-brand-cream-50/60",
-      borderColor: "border-brand-brown-200/50",
-      highlight: true,
-    },
-    {
-      category: "KONSUMEN",
-      categoryLabel: "Konsumen",
-      author: "Ayu",
-      role: "Konsumen Setia",
-      quote: "Setelah saya rutin pakai VCO dari CocoSam, rambut saya jadi tidak rontok banget lagi.",
-      bgColor: "bg-white",
-      borderColor: "border-gray-200/60",
-      highlight: false,
-    },
-    {
-      category: "KONSUMEN",
-      categoryLabel: "Konsumen",
-      author: "Esti",
-      role: "Konsumen Setia",
-      quote: "Karena saya rutin pakai VCO CocoSam rambut saya jadi jauh lebih lembut dan tebal.",
-      bgColor: "bg-brand-green-50/30",
-      borderColor: "border-brand-green-100/60",
-      highlight: false,
-    },
-    {
-      category: "KONSUMEN",
-      categoryLabel: "Konsumen",
-      author: "Zakuan",
-      role: "Konsumen Setia",
-      quote: "Review jujur, ini botol ke-3 VCO CocoSam yang telah saya pakai. Saya biasa pakai untuk sunscreen wajah atau kumur. Manfaatnya melembabkan kulit dan menyehatkan. Saya akan tetap berlangganan dengan VCO CocoSam 👍🏻",
-      bgColor: "bg-white",
-      borderColor: "border-gray-200/60",
-      highlight: false,
-    },
-  ];
+  useEffect(() => {
+    async function loadData() {
+      const res = await getTestimonialsList();
+      if (res.success && res.data) {
+        setTestimonials(res.data);
+      }
+      setIsLoading(false);
+    }
+    loadData();
+  }, []);
 
   const filteredTestimonials = filter === "ALL" 
     ? testimonials 
     : testimonials.filter(t => t.category === filter);
+
+  const mitraCount = testimonials.filter(t => t.category === "MITRA").length;
+  const konsumenCount = testimonials.filter(t => t.category === "KONSUMEN").length;
 
   return (
     <section id="testimoni" className="py-24 bg-brand-cream-100/30 relative">
@@ -100,7 +74,7 @@ export default function Testimonials() {
                 }`}
               >
                 <Building2 className="w-3.5 h-3.5" />
-                <span>Mitra Bisnis (2)</span>
+                <span>Mitra Bisnis ({mitraCount})</span>
               </button>
               <button
                 onClick={() => setFilter("KONSUMEN")}
@@ -111,7 +85,7 @@ export default function Testimonials() {
                 }`}
               >
                 <User className="w-3.5 h-3.5" />
-                <span>Konsumen (3)</span>
+                <span>Konsumen ({konsumenCount})</span>
               </button>
             </div>
           </div>
@@ -122,7 +96,9 @@ export default function Testimonials() {
           {filteredTestimonials.map((t, idx) => (
             <div
               key={idx}
-              className={`p-7 rounded-3xl border ${t.borderColor} ${t.bgColor} shadow-sm hover:shadow-md transition-all duration-300 relative flex flex-col justify-between ${
+              className={`p-7 rounded-3xl border border-gray-200/60 ${
+                t.category === "MITRA" ? "bg-brand-green-50/40" : "bg-white"
+              } shadow-sm hover:shadow-md transition-all duration-300 relative flex flex-col justify-between ${
                 t.highlight ? "lg:col-span-2" : ""
               }`}
             >

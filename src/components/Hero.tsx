@@ -72,9 +72,9 @@ export default function Hero() {
 
           {/* Image Showcase */}
           <div className="lg:col-span-5 relative flex justify-center mt-4 lg:mt-0">
-            <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[360px] lg:max-w-[420px] aspect-[4/5] rounded-3xl overflow-hidden bg-white">
+            <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[380px] lg:max-w-[440px] aspect-[4/5] rounded-3xl overflow-hidden bg-white shadow-xs">
               <Image
-                src="/image4.png"
+                src="/hero-image.png"
                 alt="CocoSam Virgin Coconut Oil Lombok"
                 fill
                 priority

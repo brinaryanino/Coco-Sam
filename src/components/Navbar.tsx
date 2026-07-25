@@ -2,7 +2,15 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, MessageCircle, ChevronDown, Camera, Users, Sparkles } from "lucide-react";
+import {
+  Menu,
+  X,
+  MessageCircle,
+  ChevronDown,
+  Camera,
+  Users,
+  Sparkles,
+} from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +20,10 @@ export default function Navbar() {
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -28,36 +39,42 @@ export default function Navbar() {
   ];
 
   const dropdownSubItems = [
-    { name: "Kenapa Kami", href: "#kenapa-kami", icon: <Sparkles className="w-4 h-4 text-brand-green-600" /> },
-    { name: "Tentang Kami", href: "#tentang-kami", icon: <Users className="w-4 h-4 text-brand-green-600" /> },
-    { name: "Dokumentasi Foto ↗", href: "/dokumentasi", target: "_blank", icon: <Camera className="w-4 h-4 text-brand-green-600" /> },
+    {
+      name: "Kenapa Kami",
+      href: "#kenapa-kami",
+      icon: <Sparkles className="w-4 h-4 text-brand-green-600" />,
+    },
+    {
+      name: "Tentang Kami",
+      href: "#tentang-kami",
+      icon: <Users className="w-4 h-4 text-brand-green-600" />,
+    },
+    {
+      name: "Dokumentasi Foto ↗",
+      href: "/dokumentasi",
+      target: "_blank",
+      icon: <Camera className="w-4 h-4 text-brand-green-600" />,
+    },
   ];
 
-  const waLink = "https://wa.me/6285337280512?text=Halo%20CocoSam%2C%20saya%20tertarik%20untuk%20kerja%20sama%20supply%20VCO%20untuk%20bisnis%20saya";
+  const waLink =
+    "https://wa.me/6285337280512?text=Halo%20CocoSam%2C%20saya%20tertarik%20untuk%20kerja%20sama%20supply%20VCO%20untuk%20bisnis%20saya";
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-brand-green-100 shadow-xs transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
-          <a href="#hero" className="flex items-center space-x-2.5 group">
-            <div className="relative w-10 h-10 flex-shrink-0">
+          <a href="#hero" className="flex items-center group py-1">
+            <div className="relative h-14 sm:h-16 w-36 sm:w-48 flex-shrink-0">
               <Image
                 src="/header-img.png"
                 alt="CocoSam Logo"
                 fill
-                className="object-contain transform group-hover:scale-105 transition-transform duration-300"
-                sizes="40px"
+                className="object-contain object-left transform group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 640px) 150px, 200px"
                 priority
               />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold tracking-tight text-brand-green-700 font-sans">
-                Coco<span className="text-brand-brown-500">Sam</span>
-              </span>
-              <span className="text-[10px] tracking-widest text-brand-green-600 font-semibold uppercase -mt-1">
-                Virgin Coconut Oil
-              </span>
             </div>
           </a>
 
@@ -81,7 +98,9 @@ export default function Navbar() {
                 className="flex items-center space-x-1 text-gray-600 hover:text-brand-green-700 font-medium transition-colors duration-200 text-sm py-2"
               >
                 <span>Tentang Kami</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180 text-brand-green-600" : ""}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180 text-brand-green-600" : ""}`}
+                />
               </button>
 
               {/* Dropdown Menu Box */}
@@ -138,7 +157,11 @@ export default function Navbar() {
               className="text-brand-green-700 p-2 hover:bg-brand-green-50 rounded-lg transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
