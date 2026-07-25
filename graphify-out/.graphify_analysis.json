@@ -1,0 +1,363 @@
+{
+  "communities": {
+    "0": [
+      "src_app_actions_products_getlandingstats",
+      "src_app_page",
+      "src_app_page_home",
+      "src_components_aboutus",
+      "src_components_aboutus_aboutus",
+      "src_components_b2bfocus",
+      "src_components_b2bfocus_b2bfocus",
+      "src_components_benefits",
+      "src_components_benefits_benefits",
+      "src_components_cta",
+      "src_components_cta_cta",
+      "src_components_footer",
+      "src_components_footer_footer",
+      "src_components_hero",
+      "src_components_hero_hero",
+      "src_components_navbar",
+      "src_components_navbar_navbar",
+      "src_components_productdetail",
+      "src_components_productdetail_productdetail",
+      "src_components_productionprocess",
+      "src_components_productionprocess_productionprocess",
+      "src_components_stats",
+      "src_components_stats_stats",
+      "src_components_stats_statsprops",
+      "src_components_testimonials",
+      "src_components_testimonials_testimonials",
+      "src_components_trustbadges",
+      "src_components_trustbadges_trustbadges"
+    ],
+    "1": [
+      "src_app_actions_sales",
+      "src_app_actions_sales_addpayment",
+      "src_app_actions_sales_addshipment",
+      "src_app_actions_sales_createcustomer",
+      "src_app_actions_sales_createorder",
+      "src_app_actions_sales_createproduct",
+      "src_app_actions_sales_getcustomers",
+      "src_app_actions_sales_getorders",
+      "src_app_actions_sales_getproducts",
+      "src_app_actions_sales_updatecustomer",
+      "src_app_actions_sales_updatecustomerstatus",
+      "src_app_actions_sales_updateorderstatus",
+      "src_app_admin_customers_customerspageclient",
+      "src_app_admin_customers_customerspageclient_customerspageclient",
+      "src_app_admin_customers_customerspageclient_customerspageclientprops",
+      "src_app_admin_customers_page",
+      "src_app_admin_customers_page_admincustomerspage",
+      "src_app_admin_orders_orderspageclient",
+      "src_app_admin_orders_orderspageclient_orderspageclient",
+      "src_app_admin_orders_orderspageclient_orderspageclientprops",
+      "src_app_admin_orders_page",
+      "src_app_admin_orders_page_adminorderspage"
+    ],
+    "2": [
+      "eslint",
+      "eslint_config_next",
+      "package_devdependencies",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_config_next",
+      "package_devdependencies_postcss",
+      "package_devdependencies_prisma",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tsx",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "postcss",
+      "prisma",
+      "tailwindcss",
+      "tsx",
+      "types_node",
+      "types_react",
+      "types_react_dom",
+      "typescript"
+    ],
+    "3": [
+      "lucide_react",
+      "next",
+      "package",
+      "package_dependencies",
+      "package_dependencies_lucide_react",
+      "package_dependencies_next",
+      "package_dependencies_prisma_client",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_start",
+      "package_version",
+      "prisma_client",
+      "react",
+      "react_dom"
+    ],
+    "4": [
+      "src_app_actions_prisma",
+      "src_app_actions_prisma_globalforprisma",
+      "src_app_actions_products",
+      "src_app_actions_products_createproductadmin",
+      "src_app_actions_products_deleteproductadmin",
+      "src_app_actions_products_getproductsadmin",
+      "src_app_actions_products_getsitestatssettings",
+      "src_app_actions_products_updateproductadmin",
+      "src_app_actions_products_updatesitestats",
+      "src_app_actions_products_uploadproductimage",
+      "src_app_actions_products_verifystoragebucket",
+      "src_app_admin_products_page",
+      "src_app_admin_products_page_adminproductspage",
+      "src_app_admin_products_productspageclient",
+      "src_app_admin_products_productspageclient_product",
+      "src_app_admin_products_productspageclient_productspageclient",
+      "src_app_admin_products_productspageclient_productspageclientprops",
+      "src_app_admin_statsmanager",
+      "src_app_admin_statsmanager_statsmanager"
+    ],
+    "5": [
+      "ref_dom",
+      "ref_dom_iterable",
+      "ref_esnext",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_esmoduleinterop",
+      "tsconfig_compileroptions_incremental",
+      "tsconfig_compileroptions_isolatedmodules",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_paths",
+      "tsconfig_compileroptions_plugins",
+      "tsconfig_compileroptions_resolvejsonmodule",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict"
+    ],
+    "6": [
+      "ref_next_env_d_ts",
+      "ref_next_types_ts",
+      "ref_node_modules",
+      "ref_ts",
+      "ref_tsx",
+      "tsconfig",
+      "tsconfig_exclude",
+      "tsconfig_include"
+    ],
+    "7": [
+      "eslintrc",
+      "eslintrc_extends",
+      "eslintrc_rules",
+      "eslintrc_rules_typescript_eslint_no_explicit_any",
+      "eslintrc_rules_typescript_eslint_no_unused_vars",
+      "ref_next_core_web_vitals",
+      "ref_next_typescript"
+    ],
+    "8": [
+      "src_app_layout",
+      "src_app_layout_inter",
+      "src_app_layout_metadata",
+      "src_app_layout_rootlayout"
+    ],
+    "9": [
+      "prisma_seed",
+      "prisma_seed_main",
+      "prisma_seed_prisma"
+    ],
+    "10": [
+      "src_app_actions_sales_getdashboardstats",
+      "src_app_admin_page",
+      "src_app_admin_page_admindashboardpage"
+    ],
+    "11": [
+      "next_config",
+      "next_config_nextconfig"
+    ],
+    "12": [
+      "postcss_config",
+      "postcss_config_config"
+    ],
+    "13": [
+      "src_app_admin_layout",
+      "src_app_admin_layout_adminlayout"
+    ],
+    "14": [
+      "src_app_dokumentasi_page",
+      "src_app_dokumentasi_page_dokumentasipage"
+    ],
+    "15": [
+      "tailwind_config",
+      "tailwind_config_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.08465608465608465,
+    "1": 0.19480519480519481,
+    "2": 0.09523809523809523,
+    "3": 0.1,
+    "4": 0.19298245614035087,
+    "5": 0.1111111111111111,
+    "6": 0.25,
+    "7": 0.2857142857142857,
+    "8": 0.5,
+    "9": 0.6666666666666666,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0
+  },
+  "gods": [
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 5
+    },
+    {
+      "id": "src_app_actions_sales_getcustomers",
+      "label": "getCustomers()",
+      "degree": 5
+    },
+    {
+      "id": "src_app_admin_orders_orderspageclient_orderspageclient",
+      "label": "OrdersPageClient()",
+      "degree": 5
+    },
+    {
+      "id": "src_app_admin_products_productspageclient_productspageclient",
+      "label": "ProductsPageClient()",
+      "degree": 5
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "degree": 5
+    },
+    {
+      "id": "src_app_actions_products_uploadproductimage",
+      "label": "uploadProductImage()",
+      "degree": 4
+    },
+    {
+      "id": "src_app_admin_customers_customerspageclient_customerspageclient",
+      "label": "CustomersPageClient()",
+      "degree": 4
+    },
+    {
+      "id": "src_app_admin_orders_page_adminorderspage",
+      "label": "AdminOrdersPage()",
+      "degree": 4
+    },
+    {
+      "id": "tsconfig_compileroptions_lib",
+      "label": "lib",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "AdminCustomersPage()",
+      "target": "getCustomers()",
+      "source_files": [
+        "src/app/admin/customers/page.tsx",
+        "src/app/actions/sales.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `AdminCustomersPage()` unexpectedly reaches hub `getCustomers()`"
+    },
+    {
+      "source": "ProductsPageClient()",
+      "target": "uploadProductImage()",
+      "source_files": [
+        "src/app/admin/products/ProductsPageClient.tsx",
+        "src/app/actions/products.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "AdminProductsPage()",
+      "target": "getProductsAdmin()",
+      "source_files": [
+        "src/app/admin/products/page.tsx",
+        "src/app/actions/products.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "ProductsPageClient()",
+      "target": "createProductAdmin()",
+      "source_files": [
+        "src/app/admin/products/ProductsPageClient.tsx",
+        "src/app/actions/products.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "ProductsPageClient()",
+      "target": "updateProductAdmin()",
+      "source_files": [
+        "src/app/admin/products/ProductsPageClient.tsx",
+        "src/app/actions/products.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `devDependencies` connect `devDependencies` to `package.json`?",
+      "why": "High betweenness centrality (0.044) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `compilerOptions` connect `compilerOptions` to `include`?",
+      "why": "High betweenness centrality (0.020) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `next/core-web-vitals`, `next/typescript`, `@typescript-eslint/no-explicit-any` to the rest of the system?",
+      "why": "59 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `app/page.tsx` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08465608465608465 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `devDependencies` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `package.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

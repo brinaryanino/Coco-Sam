@@ -1,0 +1,177 @@
+{
+  ".eslintrc.json": {
+    "mtime": 1783520706.2100248,
+    "ast_hash": "603d4ff2751954679d9d15d7f5432afe",
+    "semantic_hash": "603d4ff2751954679d9d15d7f5432afe"
+  },
+  "next.config.mjs": {
+    "mtime": 1784208584.1901581,
+    "ast_hash": "c7d40633ee3cd820f84eb0a9b4c56cf8",
+    "semantic_hash": "c7d40633ee3cd820f84eb0a9b4c56cf8"
+  },
+  "package.json": {
+    "mtime": 1784210549.088102,
+    "ast_hash": "582c24f3ba36cf9f490fd6bd5de66641",
+    "semantic_hash": "582c24f3ba36cf9f490fd6bd5de66641"
+  },
+  "postcss.config.mjs": {
+    "mtime": 1776357912.2971358,
+    "ast_hash": "b7941c02b947e17ae32f67ae7e664ec8",
+    "semantic_hash": "b7941c02b947e17ae32f67ae7e664ec8"
+  },
+  "prisma/seed.ts": {
+    "mtime": 1784208573.7601953,
+    "ast_hash": "dc71e1f7eaa4a783a8b4b7d1b6530775",
+    "semantic_hash": "dc71e1f7eaa4a783a8b4b7d1b6530775"
+  },
+  "skills-lock.json": {
+    "mtime": 1784129213.6434305,
+    "ast_hash": "4a14c8e3a0282a2525a02d6d07df3fb6",
+    "semantic_hash": "4a14c8e3a0282a2525a02d6d07df3fb6"
+  },
+  "src/app/actions/prisma.ts": {
+    "mtime": 1783520364.9026072,
+    "ast_hash": "a2aec2320deb59a9ae0c672c1f286f08",
+    "semantic_hash": "a2aec2320deb59a9ae0c672c1f286f08"
+  },
+  "src/app/actions/products.ts": {
+    "mtime": 1784730315.7261844,
+    "ast_hash": "dbe8fc0f27fabef0b83df418e1d8b5c3",
+    "semantic_hash": "dbe8fc0f27fabef0b83df418e1d8b5c3"
+  },
+  "src/app/actions/sales.ts": {
+    "mtime": 1784133451.187562,
+    "ast_hash": "8d4350fa9795af71a32f583b2a4217e5",
+    "semantic_hash": "8d4350fa9795af71a32f583b2a4217e5"
+  },
+  "src/app/admin/StatsManager.tsx": {
+    "mtime": 1784730349.1575925,
+    "ast_hash": "2cba4d3f1bee92135868734298b1e769",
+    "semantic_hash": "2cba4d3f1bee92135868734298b1e769"
+  },
+  "src/app/admin/customers/CustomersPageClient.tsx": {
+    "mtime": 1784133482.4860227,
+    "ast_hash": "7b5ad2e01edc6e7c39d25ba7b2ab77e0",
+    "semantic_hash": "7b5ad2e01edc6e7c39d25ba7b2ab77e0"
+  },
+  "src/app/admin/customers/page.tsx": {
+    "mtime": 1783520602.066686,
+    "ast_hash": "2485ed20399216ed02c00d335aef2ba4",
+    "semantic_hash": "2485ed20399216ed02c00d335aef2ba4"
+  },
+  "src/app/admin/layout.tsx": {
+    "mtime": 1784391573.5474598,
+    "ast_hash": "fe785ae5d3a91c72c0167474b5bdbd4e",
+    "semantic_hash": "fe785ae5d3a91c72c0167474b5bdbd4e"
+  },
+  "src/app/admin/orders/OrdersPageClient.tsx": {
+    "mtime": 1784391583.9237165,
+    "ast_hash": "663ced15234484c672ab938dde67fb55",
+    "semantic_hash": "663ced15234484c672ab938dde67fb55"
+  },
+  "src/app/admin/orders/page.tsx": {
+    "mtime": 1783520584.5755727,
+    "ast_hash": "5c00b688b7e7f33e788552891ddb2b8f",
+    "semantic_hash": "5c00b688b7e7f33e788552891ddb2b8f"
+  },
+  "src/app/admin/page.tsx": {
+    "mtime": 1784730359.052753,
+    "ast_hash": "e19247d3884b0a10d466f72a534418b4",
+    "semantic_hash": "e19247d3884b0a10d466f72a534418b4"
+  },
+  "src/app/admin/products/ProductsPageClient.tsx": {
+    "mtime": 1784208633.3978975,
+    "ast_hash": "83b5856f8f00033d1f91bb8137cce436",
+    "semantic_hash": "83b5856f8f00033d1f91bb8137cce436"
+  },
+  "src/app/admin/products/page.tsx": {
+    "mtime": 1784208615.4070413,
+    "ast_hash": "d7911995d474841c4622a048fc2ec456",
+    "semantic_hash": "d7911995d474841c4622a048fc2ec456"
+  },
+  "src/app/dokumentasi/page.tsx": {
+    "mtime": 1784730517.1776826,
+    "ast_hash": "aa5bb144f282d4fdb195d4e4cddb0855",
+    "semantic_hash": "aa5bb144f282d4fdb195d4e4cddb0855"
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1784391594.0495737,
+    "ast_hash": "f79c9053c88db11a95726163a2603c61",
+    "semantic_hash": "f79c9053c88db11a95726163a2603c61"
+  },
+  "src/app/page.tsx": {
+    "mtime": 1784730335.1061704,
+    "ast_hash": "29932eea3474b964bdc5627caeba3b6f",
+    "semantic_hash": "29932eea3474b964bdc5627caeba3b6f"
+  },
+  "src/components/AboutUs.tsx": {
+    "mtime": 1784730452.9658294,
+    "ast_hash": "9637cc3609e0c5181c6e70fba02757a5",
+    "semantic_hash": "9637cc3609e0c5181c6e70fba02757a5"
+  },
+  "src/components/B2BFocus.tsx": {
+    "mtime": 1784391527.7705927,
+    "ast_hash": "47e568fcb873a866e0410b7fc672659a",
+    "semantic_hash": "47e568fcb873a866e0410b7fc672659a"
+  },
+  "src/components/Benefits.tsx": {
+    "mtime": 1783512023.1898994,
+    "ast_hash": "60eda1289c1f05cbb4d70e5e84e4db53",
+    "semantic_hash": "60eda1289c1f05cbb4d70e5e84e4db53"
+  },
+  "src/components/CTA.tsx": {
+    "mtime": 1783512046.7366714,
+    "ast_hash": "2805aba58bf2c21b3ced446112cc6d74",
+    "semantic_hash": "2805aba58bf2c21b3ced446112cc6d74"
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1784730421.9039896,
+    "ast_hash": "e011d297c67d7ae5d1071a7b1c0a8344",
+    "semantic_hash": "e011d297c67d7ae5d1071a7b1c0a8344"
+  },
+  "src/components/Hero.tsx": {
+    "mtime": 1784832674.0071492,
+    "ast_hash": "3cb447885b646245b67dbe55d4935c47",
+    "semantic_hash": "3cb447885b646245b67dbe55d4935c47"
+  },
+  "src/components/Navbar.tsx": {
+    "mtime": 1784732146.9103644,
+    "ast_hash": "e6c2033761cb0fa68c355c92e2547d74",
+    "semantic_hash": "e6c2033761cb0fa68c355c92e2547d74"
+  },
+  "src/components/ProductDetail.tsx": {
+    "mtime": 1784730210.1190965,
+    "ast_hash": "68717949edec7da21bc836ff2b30ba57",
+    "semantic_hash": "68717949edec7da21bc836ff2b30ba57"
+  },
+  "src/components/ProductionProcess.tsx": {
+    "mtime": 1784391553.072728,
+    "ast_hash": "eb36d1af124bff308fe2ac717bae2e32",
+    "semantic_hash": "eb36d1af124bff308fe2ac717bae2e32"
+  },
+  "src/components/Stats.tsx": {
+    "mtime": 1784832405.1432655,
+    "ast_hash": "c71b81c5924410005935cc862eb97cab",
+    "semantic_hash": "c71b81c5924410005935cc862eb97cab"
+  },
+  "src/components/Testimonials.tsx": {
+    "mtime": 1784730216.426202,
+    "ast_hash": "335cf75939530255d78c0bd7354d99b6",
+    "semantic_hash": "335cf75939530255d78c0bd7354d99b6"
+  },
+  "src/components/TrustBadges.tsx": {
+    "mtime": 1784413022.7629256,
+    "ast_hash": "b4d6080fd5be222e82d0014ce413d900",
+    "semantic_hash": "b4d6080fd5be222e82d0014ce413d900"
+  },
+  "tailwind.config.ts": {
+    "mtime": 1783512067.0168617,
+    "ast_hash": "689c7350628364d5e384c039859f7c9d",
+    "semantic_hash": "689c7350628364d5e384c039859f7c9d"
+  },
+  "tsconfig.json": {
+    "mtime": 1783511578.6336412,
+    "ast_hash": "3bd7a3770c6b44dbcaab1d2f175db8bd",
+    "semantic_hash": "3bd7a3770c6b44dbcaab1d2f175db8bd"
+  }
+}
